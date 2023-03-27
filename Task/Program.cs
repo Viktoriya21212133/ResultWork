@@ -2,55 +2,44 @@
 // Первоначальный массив можно ввести с клавиатуры, либо задать на старте выполнения алгоритма.
 // При решении не рекомендуется пользоваться коллекциями, лучше обойтись исключитально массивами.
 
-void Print1DArr(string[] arr)
+//Печать одномерного массива 
+void Print1DArry(string[] array)
 {
-    Console.Write("[");
-    for (int i = 0; i < arr.Length-1; i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        Console.Write(arr[i]+ ", ");
+        Console.Write($"[{array[i]}]\t");
     }
-    Console.WriteLine(arr[arr.Length-1]+ "]");
-}
-string [] Read1DArr(int len)
 
-{
-    string [] arr = new string[len];
-    for (int i=0; i < arr.Length; i++)
+}
+
+// метод находит строки в массиве длиной не больше count
+// И возвращает новый массив из строк
+string [] GetNewArray(string [] arry, int count)
+{   
+    string [] result= new string [0];
+    for (int index = 0; index < arry.Length; index++)
     {
-        Console.WriteLine("Введите элемент массива", i+1);
-        arr[i]=Console.ReadLine();
+        if (arry[index].Length<=count)
+        {
+            result = result.Concat(new string[] { arry[index] }).ToArray();
+        }
     }
-    return arr;
+    return result;    
 }
-void PrintData(string line)
-{
-    Console.WriteLine(line);
-}
-string []DigitSum(string []arr)
-{
-    int len = arr.Length;
-    string []final_arr =  new string[len];
-    for (int i=0; i < arr.Length; i++)
-    {  
-        int res = 0;
-        res = arr[i].Length;
-            if (res <= 3)
-            {
-                    final_arr[i] = arr [i];        
-            }
-    }
-    return final_arr;
-}
-int ReadData(string line)
-{
-    Console.WriteLine(line);
 
-    return int.Parse(Console.ReadLine() ?? "0");
+string [] strarray = new string[]{"hello","345","new string","world",":-","r2"};
+
+string [] resultStrarry = GetNewArray(strarray,3);
+
+Console.WriteLine("Исходный массив:");
+Print1DArry(strarray);
+Console.WriteLine();
+Console.WriteLine("Массив из строк длина которых не больше 3:");
+
+if(resultStrarry.Length!=0)
+{
+    Print1DArry(resultStrarry);
+}else
+{
+    Console.WriteLine("Массив пустой!!!");
 }
-int len = ReadData("Введите длину массива: ");
-string []testArr= Read1DArr(len);
-PrintData("Исходный массив");
-Print1DArr(testArr);
-string []finalArr = DigitSum(testArr);
-PrintData("Искомый массив");
-Print1DArr(finalArr);
